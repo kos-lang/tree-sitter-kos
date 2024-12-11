@@ -2,7 +2,7 @@
   "name": "tree-sitter-kos",
   "version": "0.0.1",
   "description": "Kos grammar for tree-sitter",
-  "repository": "github:tree-sitter/tree-sitter-kos",
+  "repository": "https://github.com/kos-lang/tree-sitter-kos",
   "license": "MIT",
   "main": "bindings/node",
   "types": "bindings/node",
@@ -46,6 +46,10 @@
   "tree-sitter": [
     {
       "scope": "source.kos",
+      "file-types": [ "kos" ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
       "injection-regex": "^kos$"
     }
   ]
