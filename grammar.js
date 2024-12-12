@@ -213,26 +213,23 @@ module.exports = grammar({
 
     parameter_list: $ => seq(
       '(',
-      optional(choice(
-        $.list_parameter,
-        seq(
-          $.default_parameter,
-          repeat(seq(',', $.default_parameter)),
-          optional(seq(',', $.list_parameter))
-        ),
-        seq(
-          $._parameter,
-          repeat(seq(',', $._parameter)),
-          repeat(seq(',', $.default_parameter)),
-          optional(seq(',', $.list_parameter))
-        )
+      optional(seq(
+        $._parameter_definition,
+        repeat(seq(',', $._parameter_definition))
       )),
       ')'
     ),
 
-    default_parameter: $ => seq($._parameter, '=', $._rhs_expression),
+    _parameter_definition: $ => choice(
+      '_',
+      $._parameter,
+      $.default_parameter,
+      $.list_parameter
+    ),
 
     list_parameter: $ => seq($._parameter, '...'),
+
+    default_parameter: $ => seq($._parameter, '=', $._rhs_expression),
 
     _parameter: $ => prec('parameter', field('parameter', $.identifier)),
 
@@ -573,15 +570,15 @@ module.exports = grammar({
       $._compound_function_literal
     ),
 
-     _simple_function_literal: $ => seq(
-       choice(
-         field('name', $.identifier),
-         field('parameters', $.parameter_list)
-       ),
-       '=>',
-       //$._rhs_expression
-       $.unary_expression
-     ),
+    _simple_function_literal: $ => seq(
+      choice(
+        field('name', $.identifier),
+        field('parameters', $.parameter_list)
+      ),
+      '=>',
+      //$._rhs_expression
+      $.unary_expression
+    ),
 
     _compound_function_literal: $ => seq(
       'fun',
