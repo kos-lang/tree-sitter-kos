@@ -25,7 +25,6 @@
     "else"
     "extends"
     (fallthrough_statement)
-    (false)
     "for"
     "fun"
     ;"get"
@@ -38,19 +37,26 @@
     "return"
     ;"set"
     ;"static"
-    (super)
     "switch"
-    (this)
     "throw"
-    (true)
     "try"
     "var"
-    (void)
     "while"
     "with"
     "yield"
     "=>"
 ] @keyword
+
+[
+    (this)
+    (super)
+] @variable.builtin
+
+[
+    (false)
+    (true)
+    (void)
+] @constant.builtin
 
 [
     "("
