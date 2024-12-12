@@ -1,1 +1,85 @@
+#!/usr/bin/env kos
+# ^ comment
 public var item = 1;
+# ^ keyword
+#      ^ keyword
+#          ^ variable
+#               ^ operator
+#                 ^ number
+#                  ^ punctuation.delimiter
+
+fun name(arg1,
+# ^ keyword
+#   ^ variable
+#       ^ punctuation.bracket
+#        ^ variable
+#            ^ punctuation.delimiter
+         arg2 = "default",
+#        ^ variable
+#             ^ operator
+#               ^ string
+#                        ^ punctuation.delimiter
+         arg3...)
+#        ^ variable
+#            ^ operator
+#               ^ punctuation.bracket
+{
+# <- punctuation.bracket
+    arg1 += 1
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 -= 2
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 *= 3
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 /= 4
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 %= 5
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 |= 6
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 &= 7
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 ^= 8
+    # ^ variable
+    #    ^ operator
+    #       ^ number
+    arg1 <<= 9
+    # ^ variable
+    #    ^ operator
+    #        ^ number
+    arg1 >>= 10
+    # ^ variable
+    #    ^ operator
+    #        ^ number
+    arg1 >>>= 11
+    # ^ variable
+    #    ^ operator
+    #         ^ number
+    arg1.prop[arg1](arg1)[void] = true
+    # ^ variable
+    #   ^ punctuation.delimiter
+    #    ^ property
+    #        ^ punctuation.bracket
+    #         ^ variable
+    #             ^ punctuation.bracket
+    #              ^ punctuation.bracket
+    #               ^ variable
+    #                   ^ punctuation.bracket
+    #                    ^ punctuation.bracket
+    #                     ^ keyword
+}
+# <- punctuation.bracket

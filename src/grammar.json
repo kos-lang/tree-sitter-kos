@@ -2604,8 +2604,13 @@
           "type": "FIELD",
           "name": "property",
           "content": {
-            "type": "SYMBOL",
-            "name": "identifier"
+            "type": "ALIAS",
+            "content": {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            "named": true,
+            "value": "property_identifier"
           }
         }
       ]
@@ -2872,8 +2877,13 @@
               "type": "FIELD",
               "name": "property",
               "content": {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "type": "ALIAS",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                "named": true,
+                "value": "property_identifier"
               }
             }
           ]

@@ -55,7 +55,7 @@ import base.range
     (expression
         (refinement
             name: (identifier)
-            property: (identifier))))
+            property: (property_identifier))))
 
 ======
 Return

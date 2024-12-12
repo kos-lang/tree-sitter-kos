@@ -143,7 +143,7 @@ Objects
 (source_file
     (expression (object))
     (expression (object
-        (property (identifier) (number))
+        (property (property_identifier) (number))
         (property (string_literal) (number)))))
 
 =======

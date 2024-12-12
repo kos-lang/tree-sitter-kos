@@ -656,7 +656,7 @@ module.exports = grammar({
     _identifier_refinement: $ => seq(
       '.',
       optional('?'),
-      field('property', $.identifier)
+      field('property', alias($.identifier, $.property_identifier))
     ),
 
     _literal_refinement: $ => seq(
@@ -717,7 +717,7 @@ module.exports = grammar({
     ),
 
     property: $ => seq(
-      choice($._string, field('property', $.identifier)),
+      choice($._string, field('property', alias($.identifier, $.property_identifier))),
       ':',
       $._rhs_expression
     ),

@@ -1,6 +1,7 @@
 (comment) @comment
 (number) @number
 (identifier) @variable
+(property_identifier) @property
 (string_literal) @string
 (string_literal_begin) @string
 (string_literal_continuation) @string
