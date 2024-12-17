@@ -10,8 +10,24 @@ module.exports = grammar({
   ],
 
   precedences: _ => [
-    ['member', 'unary', 'refinement', 'multiplication', 'addition'],
-    ['with', 'parameter', 'primary']
+    [
+      'with',
+      'parameters',
+      'refinement',
+      'invocation',
+      'primary',
+      'member',
+      'unary',
+      'multiplication',
+      'addition',
+      'arithmetic',
+      'bitwise',
+      'comparison',
+      'logical',
+      'conditional',
+      'stream',
+      'yield'
+    ]
   ],
 
   rules: {
@@ -211,14 +227,14 @@ module.exports = grammar({
 
     // Function arguments
 
-    parameter_list: $ => seq(
+    parameter_list: $ => prec.left('parameters', seq(
       '(',
       optional(seq(
         $._parameter_definition,
         repeat(seq(',', $._parameter_definition))
       )),
       ')'
-    ),
+    )),
 
     _parameter_definition: $ => choice(
       '_',
@@ -231,7 +247,7 @@ module.exports = grammar({
 
     default_parameter: $ => seq($._parameter, '=', $._rhs_expression),
 
-    _parameter: $ => prec('parameter', field('parameter', $.identifier)),
+    _parameter: $ => prec('parameters', field('parameter', $.identifier)),
 
     // Class statement
 
@@ -341,25 +357,15 @@ module.exports = grammar({
 
     _rhs_expression: $ => choice(
       $._stream_expression,
-      // $.async_expression,
       $.yield_expression
     ),
 
-    yield_expression: $ => seq(
+    yield_expression: $ => prec.right('yield', seq(
       'yield',
-      $._stream_expression //choice($._stream_expression, $.async_expression)
-    ),
+      $._stream_expression
+    )),
 
-    // async_expression: $ => seq(
-    //   'async',
-    //   choice(
-    //     prec(1, $.invocation)
-    //     prec(2, seq($._stream_expression, '->', $._conditional_expression)),
-    //     prec(2, $.do_statement)
-    //   )
-    // ),
-
-    _stream_expression: $ => prec.left(seq(
+    _stream_expression: $ => prec.left('stream', seq(
       repeat(seq(
         $._conditional_expression,
         '->'
@@ -368,11 +374,11 @@ module.exports = grammar({
     )),
 
     _conditional_expression: $ => choice(
-      prec(1, $._logical_expression),
-      prec(2, $.conditional_expression)
+      $._logical_expression,
+      $.conditional_expression
     ),
 
-    conditional_expression: $ => prec.left(seq(
+    conditional_expression: $ => prec.left('conditional', seq(
       $._logical_expression,
       '?',
       $._conditional_expression,
@@ -381,12 +387,12 @@ module.exports = grammar({
     )),
 
     _logical_expression: $ => choice(
-      prec(1, $._comparison_expression),
-      prec(2, $.logical_and_expression),
-      prec(2, $.logical_or_expression)
+      $._comparison_expression,
+      $.logical_and_expression,
+      $.logical_or_expression
     ),
 
-    logical_and_expression: $ => prec.left(seq(
+    logical_and_expression: $ => prec.left('logical', seq(
       $._comparison_expression,
       repeat1(seq(
         $.logical_and_operator,
@@ -394,7 +400,7 @@ module.exports = grammar({
       ))
     )),
 
-    logical_or_expression: $ => prec.left(seq(
+    logical_or_expression: $ => prec.left('logical', seq(
       $._comparison_expression,
       repeat1(seq(
         $.logical_or_operator,
@@ -403,19 +409,19 @@ module.exports = grammar({
     )),
 
     _comparison_expression: $ => choice(
-      prec(1, $._arith_bitwise_expression),
-      prec(2, $.comparison_expression)
+      $._arith_bitwise_expression,
+      $.comparison_expression
     ),
 
-    comparison_expression: $ => seq(
+    comparison_expression: $ => prec.left('comparison', seq(
       $._arith_bitwise_expression,
       $.comparison_operator,
       $._arith_bitwise_expression
-    ),
+    )),
 
     _arith_bitwise_expression: $ => choice(
-      prec(1, $._arith_expression),
-      prec(2, $._bitwise_expression)
+      $._arith_expression,
+      $._bitwise_expression
     ),
 
     _bitwise_expression: $ => choice(
@@ -425,7 +431,7 @@ module.exports = grammar({
       $.bitwise_shift_expression
     ),
 
-    bitwise_or_expression: $ => prec.left(seq(
+    bitwise_or_expression: $ => prec.left('bitwise', seq(
       $._unary_expression,
       repeat1(seq(
         $.bitwise_or_operator,
@@ -433,7 +439,7 @@ module.exports = grammar({
       ))
     )),
 
-    bitwise_and_expression: $ => prec.left(seq(
+    bitwise_and_expression: $ => prec.left('bitwise', seq(
       $._unary_expression,
       repeat1(seq(
         $.bitwise_and_operator,
@@ -441,7 +447,7 @@ module.exports = grammar({
       ))
     )),
 
-    bitwise_xor_expression: $ => prec.left(seq(
+    bitwise_xor_expression: $ => prec.left('bitwise', seq(
       $._unary_expression,
       repeat1(seq(
         $.bitwise_xor_operator,
@@ -449,16 +455,16 @@ module.exports = grammar({
       ))
     )),
 
-    bitwise_shift_expression: $ => prec.left(seq(
+    bitwise_shift_expression: $ => prec.left('bitwise', seq(
       $._unary_expression,
       $.bitwise_shift_operator,
       $._unary_expression
     )),
 
-    _arith_expression: $ => choice(
-      prec('addition', $.additive_expression),
-      prec('multiplication', $._multiplicative_expression)
-    ),
+    _arith_expression: $ => prec('arithmetic', choice(
+      $.additive_expression,
+      $._multiplicative_expression
+    )),
 
     additive_expression: $ => prec.left('addition', seq(
       $._multiplicative_expression,
@@ -572,12 +578,13 @@ module.exports = grammar({
 
     _simple_function_literal: $ => seq(
       choice(
-        field('name', $.identifier),
+        prec('parameters', '_'),
+        $._parameter,
         field('parameters', $.parameter_list)
       ),
       '=>',
       //$._rhs_expression
-      $.unary_expression
+      $._unary_expression
     ),
 
     _compound_function_literal: $ => seq(
@@ -592,12 +599,12 @@ module.exports = grammar({
       $.class_body
     ),
 
-    invocation: $ => seq(
+    invocation: $ => prec.left('invocation', seq(
       $._member_expression,
       '(',
       field('arguments', optional($.argument_list)),
       ')'
-    ),
+    )),
 
     argument_list: $ => choice(
       $._named_argument_list,
@@ -625,7 +632,7 @@ module.exports = grammar({
       optional('...')
     ),
 
-    refinement: $ => prec('refinement', seq(
+    refinement: $ => prec.left('refinement', seq(
       $._member_expression,
       choice(
         $._array_index_refinement,

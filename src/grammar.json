@@ -959,50 +959,54 @@
       ]
     },
     "parameter_list": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_parameter_definition"
-                },
-                {
-                  "type": "REPEAT",
-                  "content": {
-                    "type": "SEQ",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": ","
-                      },
-                      {
-                        "type": "SYMBOL",
-                        "name": "_parameter_definition"
-                      }
-                    ]
+      "type": "PREC_LEFT",
+      "value": "parameters",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_parameter_definition"
+                  },
+                  {
+                    "type": "REPEAT",
+                    "content": {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": ","
+                        },
+                        {
+                          "type": "SYMBOL",
+                          "name": "_parameter_definition"
+                        }
+                      ]
+                    }
                   }
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        }
-      ]
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          }
+        ]
+      }
     },
     "_parameter_definition": {
       "type": "CHOICE",
@@ -1057,7 +1061,7 @@
     },
     "_parameter": {
       "type": "PREC",
-      "value": "parameter",
+      "value": "parameters",
       "content": {
         "type": "FIELD",
         "name": "parameter",
@@ -1464,21 +1468,25 @@
       ]
     },
     "yield_expression": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "yield"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_stream_expression"
-        }
-      ]
+      "type": "PREC_RIGHT",
+      "value": "yield",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "yield"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_stream_expression"
+          }
+        ]
+      }
     },
     "_stream_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "stream",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1509,26 +1517,18 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "_logical_expression"
-          }
+          "type": "SYMBOL",
+          "name": "_logical_expression"
         },
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "SYMBOL",
-            "name": "conditional_expression"
-          }
+          "type": "SYMBOL",
+          "name": "conditional_expression"
         }
       ]
     },
     "conditional_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "conditional",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1559,34 +1559,22 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "_comparison_expression"
-          }
+          "type": "SYMBOL",
+          "name": "_comparison_expression"
         },
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "SYMBOL",
-            "name": "logical_and_expression"
-          }
+          "type": "SYMBOL",
+          "name": "logical_and_expression"
         },
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "SYMBOL",
-            "name": "logical_or_expression"
-          }
+          "type": "SYMBOL",
+          "name": "logical_or_expression"
         }
       ]
     },
     "logical_and_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "logical",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1615,7 +1603,7 @@
     },
     "logical_or_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "logical",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1646,58 +1634,46 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "_arith_bitwise_expression"
-          }
+          "type": "SYMBOL",
+          "name": "_arith_bitwise_expression"
         },
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "SYMBOL",
-            "name": "comparison_expression"
-          }
+          "type": "SYMBOL",
+          "name": "comparison_expression"
         }
       ]
     },
     "comparison_expression": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_arith_bitwise_expression"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "comparison_operator"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_arith_bitwise_expression"
-        }
-      ]
+      "type": "PREC_LEFT",
+      "value": "comparison",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_arith_bitwise_expression"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comparison_operator"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_arith_bitwise_expression"
+          }
+        ]
+      }
     },
     "_arith_bitwise_expression": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "_arith_expression"
-          }
+          "type": "SYMBOL",
+          "name": "_arith_expression"
         },
         {
-          "type": "PREC",
-          "value": 2,
-          "content": {
-            "type": "SYMBOL",
-            "name": "_bitwise_expression"
-          }
+          "type": "SYMBOL",
+          "name": "_bitwise_expression"
         }
       ]
     },
@@ -1724,7 +1700,7 @@
     },
     "bitwise_or_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "bitwise",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1753,7 +1729,7 @@
     },
     "bitwise_and_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "bitwise",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1782,7 +1758,7 @@
     },
     "bitwise_xor_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "bitwise",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1811,7 +1787,7 @@
     },
     "bitwise_shift_expression": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": "bitwise",
       "content": {
         "type": "SEQ",
         "members": [
@@ -1831,25 +1807,21 @@
       }
     },
     "_arith_expression": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PREC",
-          "value": "addition",
-          "content": {
+      "type": "PREC",
+      "value": "arithmetic",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
             "type": "SYMBOL",
             "name": "additive_expression"
-          }
-        },
-        {
-          "type": "PREC",
-          "value": "multiplication",
-          "content": {
+          },
+          {
             "type": "SYMBOL",
             "name": "_multiplicative_expression"
           }
-        }
-      ]
+        ]
+      }
     },
     "additive_expression": {
       "type": "PREC_LEFT",
@@ -2187,12 +2159,16 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "FIELD",
-              "name": "name",
+              "type": "PREC",
+              "value": "parameters",
               "content": {
-                "type": "SYMBOL",
-                "name": "identifier"
+                "type": "STRING",
+                "value": "_"
               }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_parameter"
             },
             {
               "type": "FIELD",
@@ -2210,7 +2186,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "unary_expression"
+          "name": "_unary_expression"
         }
       ]
     },
@@ -2269,37 +2245,41 @@
       ]
     },
     "invocation": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_member_expression"
-        },
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "FIELD",
-          "name": "arguments",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "argument_list"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
+      "type": "PREC_LEFT",
+      "value": "invocation",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_member_expression"
+          },
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "FIELD",
+            "name": "arguments",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "argument_list"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ")"
           }
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        }
-      ]
+        ]
+      }
     },
     "argument_list": {
       "type": "CHOICE",
@@ -2407,7 +2387,7 @@
       ]
     },
     "refinement": {
-      "type": "PREC",
+      "type": "PREC_LEFT",
       "value": "refinement",
       "content": {
         "type": "SEQ",
@@ -3000,6 +2980,26 @@
     [
       {
         "type": "STRING",
+        "value": "with"
+      },
+      {
+        "type": "STRING",
+        "value": "parameters"
+      },
+      {
+        "type": "STRING",
+        "value": "refinement"
+      },
+      {
+        "type": "STRING",
+        "value": "invocation"
+      },
+      {
+        "type": "STRING",
+        "value": "primary"
+      },
+      {
+        "type": "STRING",
         "value": "member"
       },
       {
@@ -3008,29 +3008,39 @@
       },
       {
         "type": "STRING",
-        "value": "refinement"
-      },
-      {
-        "type": "STRING",
         "value": "multiplication"
       },
       {
         "type": "STRING",
         "value": "addition"
-      }
-    ],
-    [
-      {
-        "type": "STRING",
-        "value": "with"
       },
       {
         "type": "STRING",
-        "value": "parameter"
+        "value": "arithmetic"
       },
       {
         "type": "STRING",
-        "value": "primary"
+        "value": "bitwise"
+      },
+      {
+        "type": "STRING",
+        "value": "comparison"
+      },
+      {
+        "type": "STRING",
+        "value": "logical"
+      },
+      {
+        "type": "STRING",
+        "value": "conditional"
+      },
+      {
+        "type": "STRING",
+        "value": "stream"
+      },
+      {
+        "type": "STRING",
+        "value": "yield"
       }
     ]
   ],
