@@ -533,7 +533,8 @@ module.exports = grammar({
 
     additive_operator: _ => choice(
       '+',
-      '-'
+      '-',
+      '++'
     ),
 
     multiplicative_operator: _ => choice(
