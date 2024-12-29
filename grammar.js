@@ -502,6 +502,7 @@ module.exports = grammar({
     arithmetic_assignment_operator: _ => choice(
       '+=',
       '-=',
+      '++=',
       '*=',
       '/=',
       '%=',
