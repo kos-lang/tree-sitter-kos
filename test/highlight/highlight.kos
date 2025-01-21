@@ -9,8 +9,8 @@ public var item = 1;
 #                  ^ punctuation.delimiter
 
 fun name(arg1,
-# ^ keyword
-#   ^ variable
+# ^ keyword.function
+#   ^ function
 #       ^ punctuation.bracket
 #        ^ variable
 #            ^ punctuation.delimiter
@@ -82,7 +82,7 @@ fun name(arg1,
     #                    ^ punctuation.bracket
     #                     ^ constant.builtin
     #                           ^ operator
-    #                             ^ constant.builtin
+    #                             ^ boolean
     arg1 = 1 * (arg1 + 2) / arg1 - 3 % arg1
     # ^ variable
     #    ^ operator
