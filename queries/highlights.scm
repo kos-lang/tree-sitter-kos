@@ -77,14 +77,10 @@
 [
     (arithmetic_assignment_operator)
     (comparison_operator)
-    (bitwise_shift_operator)
+    (bitwise_operator)
     (additive_operator)
     (multiplicative_operator)
-    (bitwise_and_operator)
-    (bitwise_or_operator)
-    (bitwise_xor_operator)
-    (logical_and_operator)
-    (logical_or_operator)
+    (logical_operator)
     (unary_operator)
     "->"
     "..."

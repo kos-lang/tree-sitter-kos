@@ -190,12 +190,12 @@ Formatted strings
     (expression
         (formatted_string
             (string_literal_begin)
-            (additive_expression
+            (binary_expression
                 (number)
                 (additive_operator)
                 (number))
             (string_literal_continuation)
-            (additive_expression
+            (binary_expression
                 (number)
                 (additive_operator)
                 (number))

@@ -188,10 +188,10 @@ repeat {
                     (const_list
                         (identifier))
                         (number))))
-        (comparison_expression
+        (binary_expression
             (number)
             (comparison_operator)
-            (multiplicative_expression
+            (binary_expression
                 (number)
                 (multiplicative_operator)
                 (number)))))

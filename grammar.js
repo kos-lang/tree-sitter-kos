@@ -20,10 +20,10 @@ module.exports = grammar({
       'unary',
       'multiplication',
       'addition',
-      'arithmetic',
       'bitwise',
       'comparison',
       'logical',
+      'binary',
       'conditional',
       'stream',
       'yield'
@@ -373,119 +373,31 @@ module.exports = grammar({
       $._conditional_expression
     )),
 
-    _conditional_expression: $ => choice(
-      $._logical_expression,
+    _conditional_expression: $ => prec.left('conditional', choice(
+      $._binary_expression,
       $.conditional_expression
-    ),
+    )),
 
     conditional_expression: $ => prec.left('conditional', seq(
-      $._logical_expression,
+      $._binary_expression,
       '?',
       $._conditional_expression,
       ':',
       $._conditional_expression
     )),
 
-    _logical_expression: $ => choice(
-      $._comparison_expression,
-      $.logical_and_expression,
-      $.logical_or_expression
-    ),
-
-    logical_and_expression: $ => prec.left('logical', seq(
-      $._comparison_expression,
-      repeat1(seq(
-        $.logical_and_operator,
-        $._comparison_expression
-      ))
-    )),
-
-    logical_or_expression: $ => prec.left('logical', seq(
-      $._comparison_expression,
-      repeat1(seq(
-        $.logical_or_operator,
-        $._comparison_expression
-      ))
-    )),
-
-    _comparison_expression: $ => choice(
-      $._arith_bitwise_expression,
-      $.comparison_expression
-    ),
-
-    comparison_expression: $ => prec.left('comparison', seq(
-      $._arith_bitwise_expression,
-      $.comparison_operator,
-      $._arith_bitwise_expression
-    )),
-
-    _arith_bitwise_expression: $ => choice(
-      $._arith_expression,
-      $._bitwise_expression
-    ),
-
-    _bitwise_expression: $ => choice(
-      $.bitwise_or_expression,
-      $.bitwise_and_expression,
-      $.bitwise_xor_expression,
-      $.bitwise_shift_expression
-    ),
-
-    bitwise_or_expression: $ => prec.left('bitwise', seq(
-      $._unary_expression,
-      repeat1(seq(
-        $.bitwise_or_operator,
-        $._unary_expression
-      ))
-    )),
-
-    bitwise_and_expression: $ => prec.left('bitwise', seq(
-      $._unary_expression,
-      repeat1(seq(
-        $.bitwise_and_operator,
-        $._unary_expression
-      ))
-    )),
-
-    bitwise_xor_expression: $ => prec.left('bitwise', seq(
-      $._unary_expression,
-      repeat1(seq(
-        $.bitwise_xor_operator,
-        $._unary_expression
-      ))
-    )),
-
-    bitwise_shift_expression: $ => prec.left('bitwise', seq(
-      $._unary_expression,
-      $.bitwise_shift_operator,
-      $._unary_expression
-    )),
-
-    _arith_expression: $ => prec('arithmetic', choice(
-      $.additive_expression,
-      $._multiplicative_expression
-    )),
-
-    additive_expression: $ => prec.left('addition', seq(
-      $._multiplicative_expression,
-      repeat1(seq(
-        $.additive_operator,
-        $._multiplicative_expression
-      ))
-    )),
-
-    _multiplicative_expression: $ => choice(
-      $.multiplicative_expression,
+    _binary_expression: $ => choice(
+      $.binary_expression,
       $._unary_expression
     ),
 
-    multiplicative_expression: $ => prec.left('multiplication', seq(
-      $._unary_expression,
-      repeat1(seq(
-        $.multiplicative_operator,
-        $._unary_expression
-      ))
-    )),
+    binary_expression: $ => choice(
+      prec.left( 'logical',        seq($._binary_expression, $.logical_operator,        $._binary_expression)),
+      prec.left( 'comparison',     seq($._binary_expression, $.comparison_operator,     $._binary_expression)),
+      prec.left( 'bitwise',        seq($._binary_expression, $.bitwise_operator,        $._binary_expression)),
+      prec.left( 'addition',       seq($._binary_expression, $.additive_operator,       $._binary_expression)),
+      prec.left( 'multiplication', seq($._binary_expression, $.multiplicative_operator, $._binary_expression))
+    ),
 
     _unary_expression: $ => prec.right('unary', choice(
       $.unary_expression,
@@ -526,10 +438,13 @@ module.exports = grammar({
       'propertyof'
     ),
 
-    bitwise_shift_operator: _ => choice(
+    bitwise_operator: _ => choice(
       '<<',
       '>>',
-      '>>>'
+      '>>>',
+      '&',
+      '|',
+      '^'
     ),
 
     additive_operator: _ => choice(
@@ -544,15 +459,10 @@ module.exports = grammar({
       '%'
     ),
 
-    bitwise_and_operator: _ => '&',
-
-    bitwise_or_operator: _ => '|',
-
-    bitwise_xor_operator: _ => '^',
-
-    logical_and_operator: _ => '&&',
-
-    logical_or_operator: _ => '||',
+    logical_operator: _ => choice(
+      '&&',
+      '||'
+    ),
 
     unary_operator: _ => choice(
       'typeof',
@@ -585,8 +495,7 @@ module.exports = grammar({
         field('parameters', $.parameter_list)
       ),
       '=>',
-      //$._rhs_expression
-      $._unary_expression
+      $._rhs_expression
     ),
 
     _compound_function_literal: $ => seq(

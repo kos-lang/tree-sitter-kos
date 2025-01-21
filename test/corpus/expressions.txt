@@ -89,28 +89,32 @@ Multiplication
 
 (source_file
     (expression
-        (multiplicative_expression
+        (binary_expression
             (number)
             (multiplicative_operator)
             (number)))
     (expression
-        (multiplicative_expression
-            (number)
-            (multiplicative_operator)
-            (number)
-            (multiplicative_operator)
-            (number)
+        (binary_expression
+            (binary_expression
+                (binary_expression
+                    (number)
+                    (multiplicative_operator)
+                    (number)
+                )
+                (multiplicative_operator)
+                (number)
+            )
             (multiplicative_operator)
             (number)))
     (expression
-        (multiplicative_expression
+        (binary_expression
             (unary_expression
                 (unary_operator)
                 (number))
             (multiplicative_operator)
             (number)))
     (expression
-        (multiplicative_expression
+        (binary_expression
             (number)
             (multiplicative_operator)
             (unary_expression
@@ -118,12 +122,16 @@ Multiplication
                 (number))))
     (comment)
     (expression
-        (multiplicative_expression
-            (number)
-            (multiplicative_operator)
-            (number)
-            (multiplicative_operator)
-            (number)
+        (binary_expression
+            (binary_expression
+                (binary_expression
+                    (number)
+                    (multiplicative_operator)
+                    (number)
+                )
+                (multiplicative_operator)
+                (number)
+            )
             (multiplicative_operator)
             (unary_expression
                 (unary_operator)
@@ -133,56 +141,48 @@ Multiplication
 Addition
 ========
 
-x(1 + 2)
-x(1 * 2 + 3)
-x(4 + 5 * 6)
-x(3 + 4 - 5 + 6)
+1 + 2
+1 * 2 + 3
+4 + 5 * 6
+3 + 4 - 5 + 6
 
 ---
 
 (source_file
     (expression
-        (invocation
-            (identifier)
-            (argument_list
-                (additive_expression
-                    (number)
-                    (additive_operator)
-                    (number)))))
+        (binary_expression
+            (number)
+            (additive_operator)
+            (number)))
     (expression
-        (invocation
-            (identifier)
-            (argument_list
-                (additive_expression
-                    (multiplicative_expression
-                        (number)
-                        (multiplicative_operator)
-                        (number))
-                    (additive_operator)
-                    (number)))))
+        (binary_expression
+            (binary_expression
+                (number)
+                (multiplicative_operator)
+                (number))
+            (additive_operator)
+            (number)))
     (expression
-        (invocation
-            (identifier)
-            (argument_list
-                (additive_expression
-                    (number)
-                    (additive_operator)
-                    (multiplicative_expression
-                        (number)
-                        (multiplicative_operator)
-                        (number))))))
+        (binary_expression
+            (number)
+            (additive_operator)
+            (binary_expression
+                (number)
+                (multiplicative_operator)
+                (number))))
     (expression
-        (invocation
-            (identifier)
-            (argument_list
-                (additive_expression
+        (binary_expression
+            (binary_expression
+                (binary_expression
                     (number)
                     (additive_operator)
                     (number)
-                    (additive_operator)
-                    (number)
-                    (additive_operator)
-                    (number))))))
+                )
+                (additive_operator)
+                (number)
+            )
+            (additive_operator)
+            (number))))
 
 ======
 Shifts
@@ -197,23 +197,23 @@ const c = -1 >>> 4
 (source_file
     (expression (variable_definition
         (const_list (identifier))
-        (bitwise_shift_expression
+        (binary_expression
             (number)
-            (bitwise_shift_operator)
+            (bitwise_operator)
             (number))))
     (expression (variable_definition
         (const_list (identifier))
-        (bitwise_shift_expression
+        (binary_expression
             (number)
-            (bitwise_shift_operator)
+            (bitwise_operator)
             (number))))
     (expression (variable_definition
         (const_list (identifier))
-        (bitwise_shift_expression
+        (binary_expression
             (unary_expression
                 (unary_operator)
                 (number))
-            (bitwise_shift_operator)
+            (bitwise_operator)
             (number)))))
 
 ==========
@@ -228,25 +228,25 @@ b(3 + 4 * 5 < 6 >> 7)
 (source_file
     (expression (assignment
         (identifier)
-        (comparison_expression
+        (binary_expression
             (number)
             (comparison_operator)
             (number))))
     (expression (invocation
         (identifier)
         (argument_list
-            (comparison_expression
-                (additive_expression
+            (binary_expression
+                (binary_expression
                     (number)
                     (additive_operator)
-                    (multiplicative_expression
+                    (binary_expression
                         (number)
                         (multiplicative_operator)
                         (number)))
                 (comparison_operator)
-                (bitwise_shift_expression
+                (binary_expression
                     (number)
-                    (bitwise_shift_operator)
+                    (bitwise_operator)
                     (number)))))))
 
 ===========
@@ -270,23 +270,23 @@ const b = 4 == 5 && 10 < 11 ? 6 ^ 7 : 8 & 9
         (variable_definition (const_list
             (identifier))
             (conditional_expression
-                (logical_and_expression
-                    (comparison_expression
+                (binary_expression
+                    (binary_expression
                         (number)
                         (comparison_operator)
                         (number))
-                    (logical_and_operator)
-                    (comparison_expression
+                    (logical_operator)
+                    (binary_expression
                         (number)
                         (comparison_operator)
                         (number)))
-                (bitwise_xor_expression
+                (binary_expression
                     (number)
-                    (bitwise_xor_operator)
+                    (bitwise_operator)
                     (number))
-                (bitwise_and_expression
+                (binary_expression
                     (number)
-                    (bitwise_and_operator)
+                    (bitwise_operator)
                     (number))))))
 
 =====
@@ -307,10 +307,10 @@ fun xx
             (expression
                 (yield_expression
                     (conditional_expression
-                        (comparison_expression
+                        (binary_expression
                             (number)
                             (comparison_operator)
-                            (multiplicative_expression
+                            (binary_expression
                                 (number)
                                 (multiplicative_operator)
                                 (number)))
