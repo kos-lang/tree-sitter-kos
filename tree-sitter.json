@@ -1,13 +1,15 @@
 {
   "grammars": [
-    "name": "kos",
-    "camelcase": "Kos",
-    "scope": "source.kos",
-    "path": ".",
-    "file-types": [ "kos" ],
-    "first-line-regex": "#!.*\\bkos$",
-    "highlights": [ "queries/highlights.scm" ],
-    "injection-regex": "^kos$"
+    {
+      "name": "kos",
+      "camelcase": "Kos",
+      "scope": "source.kos",
+      "path": ".",
+      "file-types": [ "kos" ],
+      "first-line-regex": "#!.*\\bkos$",
+      "highlights": [ "queries/highlights.scm" ],
+      "injection-regex": "^kos$"
+    }
   ],
   "metadata": {
     "version": "0.1.0",
