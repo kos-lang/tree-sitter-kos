@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Set up tree-sitter
         uses: tree-sitter/setup-action/cli@v2
+      - name: Generate
+        run: tree-sitter generate
       - name: Test
-        run: |
-          tree-sitter generate
-          tree-sitter test
+        run: tree-sitter test
