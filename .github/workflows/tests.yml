@@ -1,0 +1,12 @@
+name: Tests
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: |
+          tree-sitter generate
+          tree-sitter test
