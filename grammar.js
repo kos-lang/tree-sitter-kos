@@ -107,6 +107,10 @@ module.exports = grammar({
     try_statement: $ => seq(
       'try',
       $.compound_statement,
+      $.catch_clause
+    ),
+
+    catch_clause: $ => seq(
       'catch',
       choice(
         $._catch_exception,
@@ -117,7 +121,7 @@ module.exports = grammar({
 
     _catch_exception: $ => seq(
       choice('var', 'const'),
-      field('variable', $.identifier)
+      $.variable_decl
     ),
 
     defer_statement: $ => seq('defer', $.compound_statement),
@@ -139,7 +143,7 @@ module.exports = grammar({
     with_object_expression: $ => prec('with', seq(
       optional(seq(
         'const',
-        field('variable', $.identifier),
+        $.variable_decl,
         '='
       )),
       $._rhs_expression
@@ -315,9 +319,25 @@ module.exports = grammar({
       $._rhs_expression
     ),
 
-    var_list: $ => seq('var', $._identifier_list),
+    var_list: $ => seq('var', $._identifier_decl_list),
 
-    const_list: $ => seq('const', $._identifier_list),
+    const_list: $ => seq('const', $._identifier_decl_list),
+
+    _identifier_decl_list: $ => choice($.variable_decl, $._multiple_identifiers_decl),
+
+    variable_decl: $ => field('variable', $.identifier),
+
+    _multiple_identifiers_decl: $ => seq(
+      $._identifier_decl_or_placeholder,
+      ',',
+      $._identifier_decl_or_placeholder,
+      repeat(seq(',', $._identifier_decl_or_placeholder))
+    ),
+
+    _identifier_decl_or_placeholder: $ => choice(
+      $.variable_decl,
+      '_'
+    ),
 
     _identifier_list: $ => choice($.identifier, $._multiple_identifiers),
 
@@ -329,7 +349,7 @@ module.exports = grammar({
     ),
 
     _identifier_or_placeholder: $ => choice(
-      field('variable', $.identifier),
+      $.identifier,
       '_'
     ),
 
