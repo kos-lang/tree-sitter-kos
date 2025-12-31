@@ -186,7 +186,7 @@ repeat {
             (expression
                 (variable_definition
                     (const_list
-                        (identifier))
+                        (variable_decl (identifier)))
                         (number))))
         (binary_expression
             (number)
@@ -215,13 +215,14 @@ catch const e {
             (expression
                 (invocation
                     (identifier))))
-        (identifier)
-        (compound_statement
-            (expression
-                (invocation
-                    (identifier)
-                    (argument_list
-                        (identifier)))))))
+        (catch_clause
+            (variable_decl (identifier))
+            (compound_statement
+                (expression
+                    (invocation
+                        (identifier)
+                        (argument_list
+                            (identifier))))))))
 
 ===
 For
@@ -236,7 +237,7 @@ for const x in range() {
 (source_file
     (for_statement
         (const_list
-            (identifier))
+            (variable_decl (identifier)))
         (invocation
             (identifier))
         (compound_statement
@@ -259,7 +260,7 @@ with const f = open() {
 (source_file
     (with_statement
         (with_object_expression
-            (identifier)
+            (variable_decl (identifier))
             (invocation
                 (identifier)))
         (compound_statement

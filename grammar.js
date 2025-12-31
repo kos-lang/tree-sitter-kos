@@ -242,16 +242,16 @@ module.exports = grammar({
 
     _parameter_definition: $ => choice(
       '_',
-      $._parameter,
+      $.parameter,
       $.default_parameter,
       $.list_parameter
     ),
 
-    list_parameter: $ => seq($._parameter, '...'),
+    list_parameter: $ => seq($.parameter, '...'),
 
-    default_parameter: $ => seq($._parameter, '=', $._rhs_expression),
+    default_parameter: $ => seq($.parameter, '=', $._rhs_expression),
 
-    _parameter: $ => prec('parameters', field('parameter', $.identifier)),
+    parameter: $ => prec('parameters', field('parameter', $.identifier)),
 
     // Class statement
 
@@ -511,7 +511,7 @@ module.exports = grammar({
     _simple_function_literal: $ => seq(
       choice(
         prec('parameters', '_'),
-        $._parameter,
+        $.parameter,
         field('parameters', $.parameter_list)
       ),
       '=>',

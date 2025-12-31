@@ -196,19 +196,19 @@ const c = -1 >>> 4
 
 (source_file
     (expression (variable_definition
-        (const_list (identifier))
+        (const_list (variable_decl (identifier)))
         (binary_expression
             (number)
             (bitwise_operator)
             (number))))
     (expression (variable_definition
-        (const_list (identifier))
+        (const_list (variable_decl (identifier)))
         (binary_expression
             (number)
             (bitwise_operator)
             (number))))
     (expression (variable_definition
-        (const_list (identifier))
+        (const_list (variable_decl (identifier)))
         (binary_expression
             (unary_expression
                 (unary_operator)
@@ -261,14 +261,14 @@ const b = 4 == 5 && 10 < 11 ? 6 ^ 7 : 8 & 9
 (source_file
     (expression
         (variable_definition (const_list
-            (identifier))
+            (variable_decl (identifier)))
             (conditional_expression
                 (number)
                 (number)
                 (number))))
     (expression
         (variable_definition (const_list
-            (identifier))
+            (variable_decl (identifier)))
             (conditional_expression
                 (binary_expression
                     (binary_expression

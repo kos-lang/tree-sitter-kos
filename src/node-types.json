@@ -652,6 +652,25 @@
     "fields": {}
   },
   {
+    "type": "catch_clause",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "compound_statement",
+          "named": true
+        },
+        {
+          "type": "variable_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "class_body",
     "named": true,
     "fields": {},
@@ -931,24 +950,13 @@
   {
     "type": "const_list",
     "named": true,
-    "fields": {
-      "variable": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
-          "type": "identifier",
+          "type": "variable_decl",
           "named": true
         }
       ]
@@ -1178,21 +1186,11 @@
             "named": true
           }
         ]
-      },
-      "parameter": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "array",
@@ -1236,6 +1234,10 @@
         },
         {
           "type": "object",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         },
         {
@@ -1524,16 +1526,6 @@
             "named": true
           }
         ]
-      },
-      "variable": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -1795,16 +1787,6 @@
           }
         ]
       },
-      "parameter": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      },
       "parameters": {
         "multiple": false,
         "required": false,
@@ -1866,6 +1848,10 @@
         },
         {
           "type": "object",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         },
         {
@@ -2156,17 +2142,16 @@
   {
     "type": "list_parameter",
     "named": true,
-    "fields": {
-      "parameter": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2210,12 +2195,12 @@
     }
   },
   {
-    "type": "parameter_list",
+    "type": "parameter",
     "named": true,
     "fields": {
       "parameter": {
-        "multiple": true,
-        "required": false,
+        "multiple": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -2223,7 +2208,12 @@
           }
         ]
       }
-    },
+    }
+  },
+  {
+    "type": "parameter_list",
+    "named": true,
+    "fields": {},
     "children": {
       "multiple": true,
       "required": false,
@@ -2234,6 +2224,10 @@
         },
         {
           "type": "list_parameter",
+          "named": true
+        },
+        {
+          "type": "parameter",
           "named": true
         }
       ]
@@ -3155,22 +3149,15 @@
   {
     "type": "try_statement",
     "named": true,
-    "fields": {
-      "variable": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
-      }
-    },
+    "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "catch_clause",
+          "named": true
+        },
         {
           "type": "compound_statement",
           "named": true
@@ -3288,10 +3275,25 @@
   {
     "type": "var_list",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variable_decl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variable_decl",
+    "named": true,
     "fields": {
       "variable": {
-        "multiple": true,
-        "required": false,
+        "multiple": false,
+        "required": true,
         "types": [
           {
             "type": "identifier",
@@ -3299,16 +3301,6 @@
           }
         ]
       }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3532,16 +3524,6 @@
             "named": true
           }
         ]
-      },
-      "variable": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "identifier",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -3614,6 +3596,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "variable_decl",
           "named": true
         },
         {
@@ -3942,7 +3928,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "const",

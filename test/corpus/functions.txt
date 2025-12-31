@@ -51,14 +51,17 @@ fun mix_and_match(arg1, arg2, arg3 = 3, rest...)
     (function_decl
         name: (identifier)
         parameters: (parameter_list
-            parameter: (identifier))
+            (parameter
+                parameter: (identifier)))
         (compound_statement))
     (public_statement
         (function_decl
             name: (identifier)
             parameters: (parameter_list
-                parameter: (identifier)
-                parameter: (identifier))
+                (parameter
+                    parameter: (identifier))
+                (parameter
+                    parameter: (identifier)))
             (compound_statement
                 (return_statement
                     name: (identifier)))))
@@ -66,17 +69,21 @@ fun mix_and_match(arg1, arg2, arg3 = 3, rest...)
         name: (identifier)
         parameters: (parameter_list
             (list_parameter
-                parameter: (identifier)))
+                (parameter
+                    parameter: (identifier))))
         (compound_statement
             (return_statement
                 name: (identifier))))
     (function_decl
         name: (identifier)
         parameters: (parameter_list
-            parameter: (identifier)
-            parameter: (identifier)
+            (parameter
+                parameter: (identifier))
+            (parameter
+                parameter: (identifier))
             (list_parameter
-                parameter: (identifier)))
+                (parameter
+                    parameter: (identifier))))
         (compound_statement
             (return_statement
                 name: (identifier))))
@@ -84,22 +91,28 @@ fun mix_and_match(arg1, arg2, arg3 = 3, rest...)
         name: (identifier)
         parameters: (parameter_list
             (default_parameter
-                parameter: (identifier)
+                (parameter
+                    parameter: (identifier))
                 (number))
             (default_parameter
-                parameter: (identifier)
+                (parameter
+                    parameter: (identifier))
                 (number)))
         (compound_statement))
     (function_decl
         name: (identifier)
         parameters: (parameter_list
-            parameter: (identifier)
-            parameter: (identifier)
+            (parameter
+                parameter: (identifier))
+            (parameter
+                parameter: (identifier))
             (default_parameter
-                parameter: (identifier)
+                (parameter
+                    parameter: (identifier))
                 (number))
             (list_parameter
-                parameter: (identifier)))
+                (parameter
+                    parameter: (identifier))))
         (compound_statement
             (return_statement
                 name: (identifier)))))
@@ -140,7 +153,8 @@ class b {
             (class_member
                 (constructor_literal
                     (parameter_list
-                        (identifier))
+                        (parameter
+                            (identifier)))
                     (compound_statement))))))
 
 =================
@@ -157,16 +171,17 @@ const b = fun(x) { }
     (expression
         (variable_definition
             (const_list
-                (identifier))
+                (variable_decl (identifier)))
             (function_literal
                 (compound_statement))))
     (expression
         (variable_definition
             (const_list
-                (identifier))
+                (variable_decl (identifier)))
             (function_literal
                 (parameter_list
-                    (identifier))
+                    (parameter
+                        (identifier)))
                 (compound_statement)))))
 
 ==============
@@ -183,13 +198,13 @@ const b = class extends c { constructor { } }
     (expression
         (variable_definition
             (const_list
-                (identifier))
+                (variable_decl (identifier)))
             (class_literal
                 (class_body))))
     (expression
         (variable_definition
             (const_list
-                (identifier))
+                (variable_decl (identifier)))
             (class_literal
                 (extends_decl
                     (identifier))

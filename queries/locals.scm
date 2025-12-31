@@ -19,14 +19,14 @@
 (variable_decl
   variable: (identifier) @local.definition.var)
 
-(_parameter
+(parameter
   parameter: (identifier) @local.definition.var)
 
 (import
-  (module) @local.definition.import)
+  module: (identifier) @local.definition.import)
 
 (import
-  (symbol) @local.definition.import)
+  symbol: (identifier) @local.definition.import)
 
 (function_decl
   name: (identifier) @local.definition.function
