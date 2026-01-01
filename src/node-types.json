@@ -2722,6 +2722,10 @@
           "named": true
         },
         {
+          "type": "hash_bang",
+          "named": true
+        },
+        {
           "type": "if_statement",
           "named": true
         },
@@ -3982,6 +3986,10 @@
   {
     "type": "fun",
     "named": false
+  },
+  {
+    "type": "hash_bang",
+    "named": true
   },
   {
     "type": "identifier",

@@ -20,7 +20,7 @@
   variable: (identifier) @local.definition.var)
 
 (parameter
-  parameter: (identifier) @local.definition.var)
+  parameter: (identifier) @local.definition.parameter)
 
 (import
   module: (identifier) @local.definition.import)
@@ -33,7 +33,7 @@
   (#set! definition.var.scope parent))
 
 (class_decl
-  name: (identifier) @local.definition.class
+  name: (identifier) @local.definition.type
   (#set! definition.var.scope parent))
 
 ; References

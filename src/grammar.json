@@ -7,6 +7,18 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "hash_bang"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "REPEAT",
           "content": {
             "type": "PREC",
@@ -51,6 +63,10 @@
           }
         }
       ]
+    },
+    "hash_bang": {
+      "type": "PATTERN",
+      "value": "#!.*"
     },
     "import": {
       "type": "PREC_LEFT",

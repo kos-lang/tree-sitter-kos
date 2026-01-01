@@ -32,9 +32,12 @@ module.exports = grammar({
 
   rules: {
     source_file: $ => seq(
+      optional($.hash_bang),
       repeat(prec(2, choice($.import, ';'))),
       repeat(prec(1, choice($._statement, $.public_statement, ';')))
     ),
+
+    hash_bang: _ => /#!.*/,
 
     import: $ => prec.left(seq(
       'import',
