@@ -54,6 +54,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -153,6 +157,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -274,6 +282,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -372,6 +384,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -467,6 +483,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -577,6 +597,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -889,6 +913,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -1025,6 +1053,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -1213,6 +1245,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -1353,6 +1389,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -1452,6 +1492,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -1561,6 +1605,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -1664,6 +1712,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -1827,6 +1879,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -1930,6 +1986,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -2078,6 +2138,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -2283,6 +2347,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -2414,6 +2482,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -2516,6 +2588,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -2611,6 +2687,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -2773,6 +2853,16 @@
     }
   },
   {
+    "type": "string_literal_begin",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "string_literal_continuation",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "switch_case",
     "named": true,
     "fields": {
@@ -2841,6 +2931,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -2990,6 +3084,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -3089,6 +3187,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -3206,6 +3308,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -3351,6 +3457,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -3457,6 +3567,10 @@
           "named": true
         },
         {
+          "type": "float_number",
+          "named": true
+        },
+        {
           "type": "formatted_string",
           "named": true
         },
@@ -3552,6 +3666,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -3673,6 +3791,10 @@
         },
         {
           "type": "false",
+          "named": true
+        },
+        {
+          "type": "float_number",
           "named": true
         },
         {
@@ -3895,6 +4017,10 @@
     "named": false
   },
   {
+    "type": "\\(",
+    "named": false
+  },
+  {
     "type": "]",
     "named": false
   },
@@ -3980,6 +4106,10 @@
     "named": true
   },
   {
+    "type": "float_number",
+    "named": true
+  },
+  {
     "type": "for",
     "named": false
   },
@@ -4045,14 +4175,6 @@
   },
   {
     "type": "string_literal",
-    "named": true
-  },
-  {
-    "type": "string_literal_begin",
-    "named": true
-  },
-  {
-    "type": "string_literal_continuation",
     "named": true
   },
   {

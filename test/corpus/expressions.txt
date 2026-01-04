@@ -316,3 +316,27 @@ fun xx
                                 (number)))
                         (number)
                         (number)))))))
+
+==========
+Invocation
+==========
+
+function(42)
+
+object.method(42)
+
+---
+
+(source_file
+    (expression
+        (invocation
+            (identifier)
+            (argument_list
+                (number))))
+    (expression
+        (invocation
+            (refinement
+                (identifier)
+                (property_identifier))
+            (argument_list
+                (number)))))

@@ -1,8 +1,10 @@
 (hash_bang) @keyword.directive
 
-(comment) @comment
+(comment) @comment @spell
 
 (number) @number
+
+(float_number) @number.float
 
 (identifier) @variable
 
@@ -14,6 +16,12 @@
   (string_literal_continuation)
   (string_literal_end)
 ] @string
+
+(formatted_string
+  [
+    "\\("
+    ")"
+  ] @punctuation.special)
 
 [
   "case"
@@ -57,8 +65,9 @@
   "=>"
 ] @keyword.function
 
+"_" @character.special
+
 [
-  "_"
   (line)
   "assert"
   ;"async"
@@ -132,3 +141,10 @@
 
 (class_decl
   name: (identifier) @type)
+
+(invocation
+  (identifier) @function.call)
+
+(invocation
+  (refinement
+    property: (property_identifier) @function.method.call))

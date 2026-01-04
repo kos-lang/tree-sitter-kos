@@ -609,6 +609,7 @@ module.exports = grammar({
       $.line,
       field('name', $.identifier),
       $.number,
+      $.float_number,
       $._string,
       $.array,
       $.object,
@@ -663,7 +664,12 @@ module.exports = grammar({
     number: _ => token(choice(
       /0[bB][01_]+/,
       /0[xX][0-9a-fA-F_]+/,
-      /(0|[1-9][0-9_]*)([.][0-9_]*)?([eEpP][+-]?(0|[1-9][0-9_]*))?/
+      /0|[1-9][0-9_]*/
+    )),
+
+    float_number: _ => token(choice(
+      /(0|[1-9][0-9_]*)[.][0-9_]*([eEpP][+-]?(0|[1-9][0-9_]*))?/,
+      /(0|[1-9][0-9_]*)[eEpP][+-]?(0|[1-9][0-9_]*)/
     )),
 
     _string: $ => choice(
@@ -695,9 +701,9 @@ module.exports = grammar({
 
     identifier: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
-    string_literal_begin: _ => /"([^"\\\r\n\u2028\u2029]|\\([fnrtv\\"0]|x[0-9a-fA-F][0-9a-fA-F]|x\{[0-9a-fA-F]+\}))*\\\(/,
+    string_literal_begin: _ => seq(/"([^"\\\r\n\u2028\u2029]|\\([fnrtv\\"0]|x[0-9a-fA-F][0-9a-fA-F]|x\{[0-9a-fA-F]+\}))*/, '\\('),
 
-    string_literal_continuation: _ => /([^"\\\r\n\u2028\u2029]|\\([fnrtv\\"0]|x[0-9a-fA-F][0-9a-fA-F]|x\{[0-9a-fA-F]+\}))*\\\(/,
+    string_literal_continuation: _ => seq(/([^"\\\r\n\u2028\u2029]|\\([fnrtv\\"0]|x[0-9a-fA-F][0-9a-fA-F]|x\{[0-9a-fA-F]+\}))*/, '\\('),
 
     string_literal_end: _ => /([^"\\\r\n\u2028\u2029]|\\([fnrtv\\"0]|x[0-9a-fA-F][0-9a-fA-F]|x\{[0-9a-fA-F]+\}))*"/,
 
