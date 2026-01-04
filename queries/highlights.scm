@@ -8,6 +8,9 @@
 
 (identifier) @variable
 
+(parameter
+  parameter: (identifier) @variable.parameter)
+
 (property_identifier) @property
 
 [
@@ -16,12 +19,6 @@
   (string_literal_continuation)
   (string_literal_end)
 ] @string
-
-(formatted_string
-  [
-    "\\("
-    ")"
-  ] @punctuation.special)
 
 [
   "case"
@@ -104,6 +101,15 @@
   "{"
   "}"
 ] @punctuation.bracket
+
+(string_literal_begin
+  "\\(" @punctuation.special)
+
+(string_literal_continuation
+  "\\(" @punctuation.special)
+
+(formatted_string
+  ")" @punctuation.special)
 
 [
   ";"
