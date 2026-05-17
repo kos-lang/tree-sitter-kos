@@ -1405,7 +1405,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "_identifier_or_placeholder"
         },
         {
           "type": "SYMBOL",

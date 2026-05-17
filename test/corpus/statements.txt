@@ -247,6 +247,25 @@ for const x in range() {
                     (argument_list
                         (identifier)))))))
 
+====================
+For with placeholder
+====================
+
+for _ in range() {
+    print()
+}
+
+---
+
+(source_file
+    (for_statement
+        (invocation
+            (identifier))
+        (compound_statement
+            (expression
+                (invocation
+                    (identifier))))))
+
 ====
 With
 ====

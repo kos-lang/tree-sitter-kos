@@ -342,7 +342,7 @@ module.exports = grammar({
       '_'
     ),
 
-    _identifier_list: $ => choice($.identifier, $._multiple_identifiers),
+    _identifier_list: $ => choice($._identifier_or_placeholder, $._multiple_identifiers),
 
     _multiple_identifiers: $ => seq(
       $._identifier_or_placeholder,
